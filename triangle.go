@@ -13,7 +13,7 @@ func (triangle Triangle) CalcPerimeter() float64 {
 }
 
 func (triangle Triangle) CalcArea() float64 {
-	return triangle.Side * math.Sqrt(3) / 4
+	return triangle.Side * triangle.Side * math.Sqrt(3) / 4
 }
 
 func (triangle Triangle) ReturnIfCircle() bool {
