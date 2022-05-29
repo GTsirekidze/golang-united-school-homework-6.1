@@ -57,9 +57,10 @@ func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
 	if len(b.shapes) <= i {
 		return nil, errors.New("index out of range")
 	}
+	curShape := b.shapes[i]
 	b.shapes[i] = shape
 
-	return shape, nil
+	return curShape, nil
 }
 
 // SumPerimeter provides sum perimeter of all shapes in the list.
@@ -85,13 +86,13 @@ func (b *box) SumArea() float64 {
 func (b *box) RemoveAllCircles() error {
 	isCircle := false
 	Error := errors.New("circles are not in list")
-	for i, item := range b.shapes {
-		if item.ReturnIfCircle() {
+	for i := 0; i < len(b.shapes); i++ {
+		if b.shapes[i].ReturnIfCircle() {
 			newBox := *b
 			newBox.shapes = append(newBox.shapes[:i], newBox.shapes[i+1:]...)
 			*b = newBox
-			isCircle = true
 			i--
+			isCircle = true
 		}
 	}
 
